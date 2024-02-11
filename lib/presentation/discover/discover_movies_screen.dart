@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:movie_app/presentation/discover/discover_movie_cubit.dart';
+import 'package:movie_app/presentation/discover/movies_cubit.dart';
 import 'package:movie_app/presentation/discover/discover_movie_state.dart';
 import 'package:movie_app/presentation/discover/movie_card.dart';
 

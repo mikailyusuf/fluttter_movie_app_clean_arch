@@ -15,6 +15,7 @@ class BaseApiClient {
     String apiToken = dotenv.env['API_TOKEN']!;
     _dio.interceptors.add(InterceptorsWrapper(
       onRequest: (options, handler) {
+        print(options.toString());
         options.headers['Authorization'] = 'Bearer $apiToken';
         return handler.next(options);
       },

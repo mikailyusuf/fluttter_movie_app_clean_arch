@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:movie_app/di/di.dart';
 import 'package:movie_app/presentation/discover/discover_movies_screen.dart';
+import 'package:movie_app/presentation/search/search_screen.dart';
 import 'package:movie_app/presentation/trending/trending_movies_screen.dart';
 import 'package:movie_app/util/theme.dart';
 
@@ -29,7 +30,9 @@ class _MovieAppState extends State<MovieApp> {
   int _currentIndex = 0;
   final List<Widget> _pages = [
     const TrendingMoviesScreen(),
+    const SearchScreen(),
     const DiscoverMoviesScreen(),
+
   ];
 
   @override
@@ -65,6 +68,10 @@ class _MovieAppState extends State<MovieApp> {
             BottomNavigationBarItem(
               icon: Icon(Icons.trending_up),
               label: 'Trending',
+            ),
+             BottomNavigationBarItem(
+              icon: Icon(Icons.search_outlined),
+              label: 'Search',
             ),
             BottomNavigationBarItem(
               icon: Icon(Icons.search),

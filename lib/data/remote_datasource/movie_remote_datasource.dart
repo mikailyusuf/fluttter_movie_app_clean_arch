@@ -9,6 +9,7 @@ import 'package:movie_app/domain/models/movie.dart';
 abstract class MoviesRemoteDataSource {
   Future<ApiResultModel<MoviesApiResponseModel>> getDiscoverMovies();
   Future<ApiResultModel<MoviesApiResponseModel>> getTrendingMovies();
+  Future<ApiResultModel<MoviesApiResponseModel>> searchMovie(String query);
 }
 
 @Injectable(as: MoviesRemoteDataSource)
@@ -44,6 +45,28 @@ class MoviesRemoteDataSourceImpl extends BaseApiClient
     };
     final response =
         await get('trending/movie/day', queryParameters: queryParams);
+    final statusCode = response.statusCode;
+    if (statusCode == 200) {
+      final dynamic jsonData = response.data ?? {};
+      final data = MoviesApiResponseModel.fromJson(jsonData);
+      return ApiResultModel.success(data: data);
+    } else {
+      return ApiResultModel.failure(
+          errorResultEntity: ErrorResultModel(
+              message: response.statusMessage, statusCode: statusCode));
+    }
+  }
+
+  @override
+  Future<ApiResultModel<MoviesApiResponseModel>> searchMovie(
+      String query) async {
+    Map<String, dynamic> queryParams = {
+      'language': 'en-US',
+      'include_adult': false,
+      'query': query,
+      'page': 1
+    };
+    final response = await get('search/movie', queryParameters: queryParams);
     final statusCode = response.statusCode;
     if (statusCode == 200) {
       final dynamic jsonData = response.data ?? {};

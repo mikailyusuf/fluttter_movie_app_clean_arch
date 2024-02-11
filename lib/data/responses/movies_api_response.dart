@@ -33,7 +33,7 @@ class MoviesApiResponseModel extends DataMapper<List<Movie>> {
                 overview: e.overview ?? '',
                 poster: "https://image.tmdb.org/t/p/w500/${e.posterPath ?? ''}",
                 id: e.id ?? 0,
-                releaseDate: e.releaseDate ?? DateTime.now()))
+                releaseDate: e.releaseDate ?? ''))
             .toList() ??
         List<Movie>.empty();
   }
@@ -60,7 +60,7 @@ class Result {
   @JsonKey(name: 'poster_path')
   final String? posterPath;
   @JsonKey(name: 'release_date')
-  final DateTime? releaseDate;
+  final String? releaseDate;
   @JsonKey(name: 'title')
   final String? title;
   @JsonKey(name: 'video')

@@ -47,4 +47,22 @@ class MoviesRepositoryImpl implements MoviesRepository {
               statusCode: 400, message: 'Unable to Load Data'));
     }
   }
+
+  @override
+  Future<ApiResultModel<List<Movie>>> searchMovie(String query) async {
+    try {
+      final ApiResultModel<MoviesApiResponseModel> _result =
+          await remoteDataSource.searchMovie(query);
+      return _result.when(
+          success: (MoviesApiResponseModel moviesResponse) async {
+        return ApiResultModel.success(data: moviesResponse.mapToEntity());
+      }, failure: (ErrorResultModel errorResponse) {
+        return ApiResultModel.failure(errorResultEntity: errorResponse);
+      });
+    } catch (e) {
+      return const ApiResultModel.failure(
+          errorResultEntity: ErrorResultModel(
+              statusCode: 400, message: 'Unable to Load Data'));
+    }
+  }
 }
