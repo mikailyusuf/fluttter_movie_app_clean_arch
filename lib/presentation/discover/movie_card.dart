@@ -13,6 +13,7 @@ class MovieCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
+       color: Theme.of(context).cardTheme.color,
       elevation: 2,
       margin: const EdgeInsets.all(8),
       child: Column(
@@ -28,10 +29,7 @@ class MovieCard extends StatelessWidget {
             padding: const EdgeInsets.all(8),
             child: Text(
               title,
-              style: const TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 16,
-              ),
+              style: Theme.of(context).textTheme.bodyMedium
             ),
           ),
         ],
